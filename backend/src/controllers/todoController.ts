@@ -3,14 +3,28 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export const getAllTodos = async (_req: Request, res: Response) => {
+export const getAllTodos = async (req: Request, res: Response) => {
   try {
-    const todos = await prisma.todo.findMany();
-    res.json(todos);
+    const page = parseInt(req.query.page as string) || 1;
+    const itemsPerPage = parseInt(req.query.itemsPerPage as string) || 10;
+    const totalTodos = await prisma.todo.count();
+    const totalPages = Math.ceil(totalTodos / itemsPerPage);
+
+    const todos = await prisma.todo.findMany({
+      skip: (page - 1) * itemsPerPage,
+      take: itemsPerPage,
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    res.json({ todos, totalPages });
   } catch (error) {
     res.status(500).json({ error: 'An error occurred while fetching todos' });
   }
 };
+
+
 
 export const getTodoById = async (req: Request, res: Response) => {
   const { id } = req.params;
