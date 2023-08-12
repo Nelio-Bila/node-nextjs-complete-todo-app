@@ -1,4 +1,6 @@
 # Todo App
+![Application UI - on Dark mode](./dark.png)
+![Application UI - on Light mode](./light.png)
 
 A simple Todo App built with a frontend Next js application and a backend Node.js server.
 
