@@ -34,7 +34,7 @@ A simple Todo App built with a frontend Next js application and a backend Node.j
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-username/todo-app.git
+   git clone https://github.com/Nelio-Bila/node-nextjs-complete-todo-app.git
    cd todo-app
 
 ## Backend
